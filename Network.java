@@ -38,16 +38,17 @@ public class Network {
     }
 
     public boolean addFollowee(String name1, String name2) {
-        if (name1.equalsIgnoreCase(name2)) { // Prevent self-following
-            return false;
+        if (name1 == null || name2 == null) {
+            return false; // Invalid input, return false
         }
         User user1 = getUser(name1);
         User user2 = getUser(name2);
         if (user1 == null || user2 == null) {
-            return false;
+            return false; // Either user does not exist
         }
         return user1.addFollowee(name2);
     }
+    
 
     public String recommendWhoToFollow(String name) {
         User user = getUser(name);
