@@ -22,7 +22,7 @@ public class Network {
 
     public User getUser(String name) {
         for (int i = 0; i < userCount; i++) {
-            if (users[i].getName().equals(name)) {
+            if (users[i].getName().equalsIgnoreCase(name)) { // Case-insensitive
                 return users[i];
             }
         }
@@ -38,6 +38,9 @@ public class Network {
     }
 
     public boolean addFollowee(String name1, String name2) {
+        if (name1.equalsIgnoreCase(name2)) { // Prevent self-following
+            return false;
+        }
         User user1 = getUser(name1);
         User user2 = getUser(name2);
         if (user1 == null || user2 == null) {
@@ -55,7 +58,7 @@ public class Network {
         int maxMutualFollowees = 0;
         for (int i = 0; i < userCount; i++) {
             User other = users[i];
-            if (other.getName().equals(name)) {
+            if (other.getName().equalsIgnoreCase(name)) {
                 continue;
             }
             int mutualCount = user.countMutual(other);
@@ -91,9 +94,9 @@ public class Network {
     }
 
     public String toString() {
-        StringBuilder result = new StringBuilder("Network:\n");
+        StringBuilder result = new StringBuilder("Network:");
         for (int i = 0; i < userCount; i++) {
-            result.append(users[i].toString()).append("\n");
+            result.append("\n").append(users[i].toString());
         }
         return result.toString();
     }
