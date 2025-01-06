@@ -39,15 +39,19 @@ public class Network {
 
     public boolean addFollowee(String name1, String name2) {
         if (name1 == null || name2 == null) {
-            return false; // Invalid input, return false
+            return false;
+        }
+        if (name1.equals(name2)) {
+            return false;
         }
         User user1 = getUser(name1);
         User user2 = getUser(name2);
         if (user1 == null || user2 == null) {
-            return false; // Either user does not exist
+            return false; 
         }
         return user1.addFollowee(name2);
     }
+    
     
 
     public String recommendWhoToFollow(String name) {
